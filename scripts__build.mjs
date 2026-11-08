@@ -1,0 +1,12 @@
+import {readFileSync,writeFileSync,mkdirSync,rmSync} from 'node:fs';
+const backup=readFileSync('src/backup.js','utf8').replaceAll('export function','function');
+const html=readFileSync('src/index.html','utf8').replace('/* BACKUP_FUNCTIONS */',backup);
+new Function(html.match(/<script>([\s\S]*)<\/script>/)[1]);
+const source=readFileSync('src/worker.js','utf8');
+if(/oai-authenticated|chatgpt\.site|ChatGPT Sites/.test(source))throw Error('Dipendenza dal vecchio hosting nel backend.');
+rmSync('dist',{recursive:true,force:true});mkdirSync('dist/server',{recursive:true});
+writeFileSync('dist/server/index.js',source.replace('/* EMBED_HTML */',JSON.stringify(html)));
+writeFileSync('dist/server/access.js',readFileSync('src/access.js'));
+writeFileSync('dist/server/community.js',readFileSync('src/community.js'));
+writeFileSync('dist/server/demo-metrics.js',readFileSync('src/demo-metrics.js'));
+console.log('Worker Cloudflare indipendente generato.');
