@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "studio-linkedin",
+  "account_id": "REPLACE_ACCOUNT_ID",
+  "main": "dist/server/index.js",
+  "compatibility_date": "2026-11-06",
+  "workers_dev": true,
+  "preview_urls": false,
+  "vars": {
+    "STUDIO_ORIGIN": "https://REPLACE_WORKER_NAME.REPLACE_SUBDOMAIN.workers.dev",
+    "LINKEDIN_CLIENT_ID": "REPLACE_LINKEDIN_CLIENT_ID",
+    "CF_ACCESS_TEAM_DOMAIN": "https://REPLACE_TEAM.cloudflareaccess.com",
+    "CF_ACCESS_AUD": "REPLACE_ACCESS_AUD",
+    "OWNER_EMAIL": "REPLACE_OWNER_EMAIL"
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "studio-linkedin",
+    "database_id": "REPLACE_D1_DATABASE_ID",
+    "migrations_dir": "migrations"
+  }]
+}
