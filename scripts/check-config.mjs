@@ -1,4 +1,4 @@
-scripts/check-config.mjsimport {readFileSync} from 'node:fs';
+import {readFileSync} from 'node:fs';
 const c=JSON.parse(readFileSync('wrangler.jsonc','utf8'));
 const v=c.vars||{};
 if(JSON.stringify(c).includes('REPLACE')||c.d1_databases?.some(d=>d.database_id==='00000000-0000-0000-0000-000000000000'))throw Error('Completa origine, database e Cloudflare Access prima del deploy.');
